@@ -13,9 +13,17 @@ int main(void)
     if (fd < 0)
         return (printf("Error opening file!\n"), 1);
     line =  get_next_line(fd);
-    printf("%s\n", line);
-    close(fd);
+    printf("%s", line);
     if (line)
         free(line);
+    line =  get_next_line(fd);
+    printf("%s", line);
+    if (line)
+        free(line);
+    line =  get_next_line(fd);
+    printf("%s", line);
+    if (line)
+        free(line);
+    close(fd);
     return (0);
 }
