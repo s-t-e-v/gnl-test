@@ -24,7 +24,7 @@ static int test6()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "Hello World\n"))
+    if (line && !strcmp(line, "Hello World\n"))
         passed++;
     else
     {
@@ -37,7 +37,7 @@ static int test6()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -50,7 +50,7 @@ static int test6()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -89,7 +89,7 @@ static int test5()
 
     ntest++;
     line =  get_next_line(fd);
-     if (!strcmp(line, "Bonjour"))
+     if (line && !strcmp(line, "Bonjour"))
         passed++;
     else
     {
@@ -102,7 +102,7 @@ static int test5()
 
     ntest++;
     line =  get_next_line(fd);
-     if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -115,7 +115,7 @@ static int test5()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -154,7 +154,7 @@ static int test4()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "a\n"))
+    if (line && !strcmp(line, "a\n"))
         passed++;
     else
     {
@@ -167,7 +167,7 @@ static int test4()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -180,7 +180,7 @@ static int test4()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -220,7 +220,7 @@ static int test3()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "\n"))
+    if (line && !strcmp(line, "\n"))
         passed++;
     else
     {
@@ -233,7 +233,7 @@ static int test3()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -246,7 +246,7 @@ static int test3()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -286,7 +286,7 @@ static int test2()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -299,7 +299,7 @@ static int test2()
 
     ntest++;
     line =  get_next_line(fd);
-     if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -312,7 +312,7 @@ static int test2()
     
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "(null)"))
+    if (line == NULL)
         passed++;
     else
     {
@@ -352,7 +352,7 @@ static int test1()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "abcdefghijklmnopqrstuvwxyz\n"))
+    if (line && !strcmp(line, "abcdefghijklmnopqrstuvwxyz\n"))
         passed++;
     else
     {
@@ -365,7 +365,7 @@ static int test1()
 
     ntest++;
     line =  get_next_line(fd);
-    if (!strcmp(line, "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"))
+    if (line && !strcmp(line, "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"))
         passed++;
     else
     {
@@ -378,7 +378,7 @@ static int test1()
 
     ntest++;
     line =  get_next_line(fd);
-     if (!strcmp(line, "0123456789"))
+     if (line && !strcmp(line, "0123456789"))
         passed++;
     else
     {
