@@ -1,67 +1,68 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <ctype.h>
 #include "get_next_line.h"
 #include <bsd/string.h>
 
 static int  testpassed = 0;
 static int  nb_test = 0;
 
+
+static void print_string_with_escapes(const char *str) {
+	if (str){
+		while (*str) {
+			if (isprint((unsigned char)*str)) {
+				putchar(*str);
+			} else {
+				printf("\\x%02x", (unsigned char)*str);
+			}
+			str++;
+		}
+	}
+    else
+        printf("(null)");
+}
+
 static int test6()
 {
-    int		fd;
+ int		fd;
     char    *line;
-    int     ntest = 0;
+    int     ntest;
     int     passed = 0;
+    char    *lines[] = {
+        "Hello World\n",
+        NULL,
+        NULL,
+    };
 
     nb_test++;
     printf("\n+ test 6");
 
     fd = open("test6.txt", 00);
-
     if (fd < 0)
         return (printf("Error opening file!\n"), -1);
 
-    ntest++;
-    line =  get_next_line(fd);
-    if (line && !strcmp(line, "Hello World\n"))
-        passed++;
-    else
+    ntest = 0;
+    while (ntest < (int)(sizeof(lines)/sizeof(lines[0])))
     {
-        printf("\n|    gnl call #1");
-        printf("\n|    expected:%s", "Hello World\n");
-        printf("\n|    actual:%s", line);
+        line =  get_next_line(fd);
+        if ((!line && !lines[ntest]) || (line && !strcmp(line, lines[ntest])))
+            passed++;
+        else
+        {
+            printf("\n|    gnl call #%d", ntest + 1);
+            printf("\n|      expected:");
+            print_string_with_escapes(lines[ntest]);
+            printf("\n|      actual:");
+            print_string_with_escapes(line);
+        }
+        if (line)
+            free(line);
+        ntest++;
     }
-    if (line)
-        free(line);
 
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #2");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
-
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #3");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
     close(fd);
-
     if (ntest == passed)
     {
         printf(" - OK");
@@ -76,57 +77,41 @@ static int test5()
 {
     int		fd;
     char    *line;
-    int     ntest = 0;
+    int     ntest;
     int     passed = 0;
+    char    *lines[] = {
+        "Bonjour",
+        NULL,
+        NULL,
+    };
 
     nb_test++;
     printf("\n+ test 5");
 
     fd = open("test5.txt", 00);
-
     if (fd < 0)
         return (printf("Error opening file!\n"), -1);
 
-    ntest++;
-    line =  get_next_line(fd);
-     if (line && !strcmp(line, "Bonjour"))
-        passed++;
-    else
+    ntest = 0;
+    while (ntest < (int)(sizeof(lines)/sizeof(lines[0])))
     {
-        printf("\n|    gnl call #1");
-        printf("\n|    expected:%s", "Bonjour");
-        printf("\n|    actual:%s", line);
+        line =  get_next_line(fd);
+        if ((!line && !lines[ntest]) || (line && !strcmp(line, lines[ntest])))
+            passed++;
+        else
+        {
+            printf("\n|    gnl call #%d", ntest + 1);
+            printf("\n|      expected:");
+            print_string_with_escapes(lines[ntest]);
+            printf("\n|      actual:");
+            print_string_with_escapes(line);
+        }
+        if (line)
+            free(line);
+        ntest++;
     }
-    if (line)
-        free(line);
 
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #2");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
-
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #3");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
     close(fd);
-
     if (ntest == passed)
     {
         printf(" - OK");
@@ -141,57 +126,41 @@ static int test4()
 {
     int		fd;
     char    *line;
-    int     ntest = 0;
+    int     ntest;
     int     passed = 0;
+    char    *lines[] = {
+        "a\n",
+        NULL,
+        NULL,
+    };
 
     nb_test++;
     printf("\n+ test 4");
 
     fd = open("test4.txt", 00);
-
     if (fd < 0)
         return (printf("Error opening file!\n"), -1);
 
-    ntest++;
-    line =  get_next_line(fd);
-    if (line && !strcmp(line, "a\n"))
-        passed++;
-    else
+    ntest = 0;
+    while (ntest < (int)(sizeof(lines)/sizeof(lines[0])))
     {
-        printf("\n|    gnl call #1");
-        printf("\n|    expected:%s", "a\n");
-        printf("\n|    actual:%s", line);
+        line =  get_next_line(fd);
+        if ((!line && !lines[ntest]) || (line && !strcmp(line, lines[ntest])))
+            passed++;
+        else
+        {
+            printf("\n|    gnl call #%d", ntest + 1);
+            printf("\n|      expected:");
+            print_string_with_escapes(lines[ntest]);
+            printf("\n|      actual:");
+            print_string_with_escapes(line);
+        }
+        if (line)
+            free(line);
+        ntest++;
     }
-    if (line)
-        free(line);
 
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #2");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
-
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #3");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
     close(fd);
-
     if (ntest == passed)
     {
         printf(" - OK");
@@ -206,58 +175,41 @@ static int test3()
 {
     int		fd;
     char    *line;
-    int     ntest = 0;
+    int     ntest;
     int     passed = 0;
+    char    *lines[] = {
+        "\n",
+        NULL,
+        NULL,
+    };
 
     nb_test++;
     printf("\n+ test 3");
 
     fd = open("test3.txt", 00);
-
     if (fd < 0)
         return (printf("Error opening file!\n"), -1);
 
-
-    ntest++;
-    line =  get_next_line(fd);
-    if (line && !strcmp(line, "\n"))
-        passed++;
-    else
+    ntest = 0;
+    while (ntest < (int)(sizeof(lines)/sizeof(lines[0])))
     {
-        printf("\n|    gnl call #1");
-        printf("\n|    expected:%s", "\n");
-        printf("\n|    actual:%s", line);
+        line =  get_next_line(fd);
+        if ((!line && !lines[ntest]) || (line && !strcmp(line, lines[ntest])))
+            passed++;
+        else
+        {
+            printf("\n|    gnl call #%d", ntest + 1);
+            printf("\n|      expected:");
+            print_string_with_escapes(lines[ntest]);
+            printf("\n|      actual:");
+            print_string_with_escapes(line);
+        }
+        if (line)
+            free(line);
+        ntest++;
     }
-    if (line)
-        free(line);
 
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #2");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
-
-    ntest++;
-    line =  get_next_line(fd);
-    if (line == NULL)
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #2");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
     close(fd);
-
     if (ntest == passed)
     {
         printf(" - OK");
@@ -291,8 +243,8 @@ static int test2()
     else
     {
         printf("\n|    gnl call #1");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
+        printf("\n|      expected:%s", "(null)");
+        printf("\n|      actual:%s", line);
     }
     if (line)
         free(line);
@@ -304,8 +256,8 @@ static int test2()
     else
     {
         printf("\n|    gnl call #2");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
+        printf("\n|      expected:%s", "(null)");
+        printf("\n|      actual:%s", line);
     }
     if (line)
         free(line);
@@ -317,8 +269,8 @@ static int test2()
     else
     {
         printf("\n|    gnl call #3");
-        printf("\n|    expected:%s", "(null)");
-        printf("\n|    actual:%s", line);
+        printf("\n|      expected:%s", "(null)");
+        printf("\n|      actual:%s", line);
     }
     if (line)
         free(line);
@@ -338,58 +290,41 @@ static int test1()
 {
     int		fd;
     char    *line;
-    int     ntest = 0;
+    int     ntest;
     int     passed = 0;
+    char    *lines[] = {
+        "abcdefghijklmnopqrstuvwxyz\n",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n",
+        "0123456789",
+    };
 
     nb_test++;
     printf("\n+ test 1");
 
     fd = open("test1.txt", 00);
-
     if (fd < 0)
         return (printf("Error opening file!\n"), -1);
 
-
-    ntest++;
-    line =  get_next_line(fd);
-    if (line && !strcmp(line, "abcdefghijklmnopqrstuvwxyz\n"))
-        passed++;
-    else
+    ntest = 0;
+    while (ntest < (int)(sizeof(lines)/sizeof(lines[0])))
     {
-        printf("\n|    gnl call #1");
-        printf("\n|    expected:%s", "abcdefghijklmnopqrstuvwxyz\n");
-        printf("\n|    actual:%s", line);
+        line =  get_next_line(fd);
+        if ((!line && !lines[ntest]) || (line && !strcmp(line, lines[ntest])))
+            passed++;
+        else
+        {
+            printf("\n|    gnl call #%d", ntest + 1);
+            printf("\n|      expected:");
+            print_string_with_escapes(lines[ntest]);
+            printf("\n|      actual:");
+            print_string_with_escapes(line);
+        }
+        if (line)
+            free(line);
+        ntest++;
     }
-    if (line)
-        free(line);
 
-    ntest++;
-    line =  get_next_line(fd);
-    if (line && !strcmp(line, "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"))
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #2");
-        printf("\n|    expected:%s", "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
-
-    ntest++;
-    line =  get_next_line(fd);
-     if (line && !strcmp(line, "0123456789"))
-        passed++;
-    else
-    {
-        printf("\n|    gnl call #3");
-        printf("\n|    expected:%s", "0123456789");
-        printf("\n|    actual:%s", line);
-    }
-    if (line)
-        free(line);
     close(fd);
-
     if (ntest == passed)
     {
         printf(" - OK");
