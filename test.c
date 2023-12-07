@@ -26,11 +26,12 @@ static void print_string_with_escapes(const char *str) {
 
 static int test8()
 {
- int		fd;
+    int		fd;
     char    *line;
     int     ntest;
     int     passed = 0;
     char    *lines[] = {
+        "\n",
         "    Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n",
         "    Pellentesque efficitur augue a lorem malesuada accumsan.\n",
         "    Praesent bibendum nisi vitae neque iaculis, ut tincidunt magna finibus.\n",
@@ -40,6 +41,7 @@ static int test8()
         "\n",
         "    Aenean dictum nibh eget sapien ornare, in bibendum nulla lobortis.\n",
         "    Praesent id enim ac mauris luctus tincidunt sed aliquam libero.\n",
+        "\n",
         "    Morbi euismod augue sit amet libero luctus, vitae hendrerit lorem finibus.\n",
         "    Aenean vitae odio aliquam, maximus ligula id, interdum ligula.\n",
         "    Cras sit amet ligula tempus, sodales eros vitae, aliquet risus.\n",
@@ -109,6 +111,7 @@ static int test7()
         "\n",
         "\n",
         NULL,
+        NULL,
     };
 
     nb_test++;
@@ -136,8 +139,6 @@ static int test7()
             free(line);
         ntest++;
     }
-    printf("\n%d\n", ntest);
-
     close(fd);
     if (ntest == passed)
     {
