@@ -24,6 +24,131 @@ static void print_string_with_escapes(const char *str) {
         printf("(null)");
 }
 
+static int test8()
+{
+ int		fd;
+    char    *line;
+    int     ntest;
+    int     passed = 0;
+    char    *lines[] = {
+        "    Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n",
+        "    Pellentesque efficitur augue a lorem malesuada accumsan.\n",
+        "    Praesent bibendum nisi vitae neque iaculis, ut tincidunt magna finibus.\n",
+        "    Fusce et sem maximus, imperdiet nisl ac, consectetur est.\n",
+        "    Nunc nec felis molestie, tincidunt tellus vel, condimentum massa.\n",
+        "    Praesent luctus lorem et nisi rutrum tempor.\n",
+        "\n",
+        "    Aenean dictum nibh eget sapien ornare, in bibendum nulla lobortis.\n",
+        "    Praesent id enim ac mauris luctus tincidunt sed aliquam libero.\n",
+        "    Morbi euismod augue sit amet libero luctus, vitae hendrerit lorem finibus.\n",
+        "    Aenean vitae odio aliquam, maximus ligula id, interdum ligula.\n",
+        "    Cras sit amet ligula tempus, sodales eros vitae, aliquet risus.\n",
+        "\n",
+        "    Pellentesque ac metus at dolor porta malesuada.\n",
+        "    Nulla bibendum orci id lectus accumsan feugiat.\n",
+        "    Pellentesque nec elit aliquam, gravida tellus vitae, fermentum dolor.\n",
+        "    Curabitur dictum mauris quis interdum ultricies.\n",
+        "    Donec sit amet ante nec metus pulvinar sollicitudin in vel felis.\n",
+        "    Morbi vel augue nec lacus vestibulum accumsan.\n",
+        "\n",
+        "    In pulvinar tortor non viverra finibus.\n",
+        "    Duis sollicitudin mauris id sapien malesuada pellentesque.\n",
+        "    Quisque vel leo nec ex feugiat luctus eu vitae arcu.\n",
+        "    Integer ultrices orci sed neque malesuada tristique.\n",
+        NULL,
+    };
+
+    nb_test++;
+    printf("\n+ test 8");
+
+    fd = open("test8.txt", 00);
+    if (fd < 0)
+        return (printf("Error opening file!\n"), -1);
+
+    ntest = 0;
+    while (ntest < (int)(sizeof(lines)/sizeof(lines[0])))
+    {
+        line =  get_next_line(fd);
+        if ((!line && !lines[ntest]) || (line && !strcmp(line, lines[ntest])))
+            passed++;
+        else
+        {
+            printf("\n|    gnl call #%d", ntest + 1);
+            printf("\n|      expected:");
+            print_string_with_escapes(lines[ntest]);
+            printf("\n|      actual:");
+            print_string_with_escapes(line);
+        }
+        if (line)
+            free(line);
+        ntest++;
+    }
+
+    close(fd);
+    if (ntest == passed)
+    {
+        printf(" - OK");
+        testpassed++;
+    }
+    else
+        printf("\n+--------> KO");
+    return (1);
+}
+
+static int test7()
+{
+ int		fd;
+    char    *line;
+    int     ntest;
+    int     passed = 0;
+    char    *lines[] = {
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        NULL,
+    };
+
+    nb_test++;
+    printf("\n+ test 7");
+
+    fd = open("test7.txt", 00);
+    if (fd < 0)
+        return (printf("Error opening file!\n"), -1);
+
+    ntest = 0;
+    while (ntest < (int)(sizeof(lines)/sizeof(lines[0])))
+    {
+        line =  get_next_line(fd);
+        if ((!line && !lines[ntest]) || (line && !strcmp(line, lines[ntest])))
+            passed++;
+        else
+        {
+            printf("\n|    gnl call #%d", ntest + 1);
+            printf("\n|      expected:");
+            print_string_with_escapes(lines[ntest]);
+            printf("\n|      actual:");
+            print_string_with_escapes(line);
+        }
+        if (line)
+            free(line);
+        ntest++;
+    }
+    printf("\n%d\n", ntest);
+
+    close(fd);
+    if (ntest == passed)
+    {
+        printf(" - OK");
+        testpassed++;
+    }
+    else
+        printf("\n+--------> KO");
+    return (1);
+}
+
 static int test6()
 {
  int		fd;
@@ -346,6 +471,8 @@ int main(void)
     test4();
     test5();
     test6();
+    test7();
+    test8();
 
     if (nb_test == testpassed)
         printf("\nAll tests passed :-) (%d/%d)\n", testpassed, nb_test);
