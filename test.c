@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <ctype.h>
-#include "get_next_line.h"
 #include <bsd/string.h>
+#include "get_next_line.h"
 
 static int  testpassed = 0;
 static int  nb_test = 0;
