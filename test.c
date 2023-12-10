@@ -78,7 +78,7 @@ static int test8()
             printf("\n|    gnl call #%d", ntest + 1);
             printf("\n|      expected:");
             print_string_with_escapes(lines[ntest]);
-            printf("\n|      actual:");
+            printf("\n|      actual  :");
             print_string_with_escapes(line);
         }
         if (line)
@@ -132,7 +132,7 @@ static int test7()
             printf("\n|    gnl call #%d", ntest + 1);
             printf("\n|      expected:");
             print_string_with_escapes(lines[ntest]);
-            printf("\n|      actual:");
+            printf("\n|      actual  :");
             print_string_with_escapes(line);
         }
         if (line)
@@ -180,7 +180,7 @@ static int test6()
             printf("\n|    gnl call #%d", ntest + 1);
             printf("\n|      expected:");
             print_string_with_escapes(lines[ntest]);
-            printf("\n|      actual:");
+            printf("\n|      actual  :");
             print_string_with_escapes(line);
         }
         if (line)
@@ -229,7 +229,7 @@ static int test5()
             printf("\n|    gnl call #%d", ntest + 1);
             printf("\n|      expected:");
             print_string_with_escapes(lines[ntest]);
-            printf("\n|      actual:");
+            printf("\n|      actual  :");
             print_string_with_escapes(line);
         }
         if (line)
@@ -278,7 +278,7 @@ static int test4()
             printf("\n|    gnl call #%d", ntest + 1);
             printf("\n|      expected:");
             print_string_with_escapes(lines[ntest]);
-            printf("\n|      actual:");
+            printf("\n|      actual  :");
             print_string_with_escapes(line);
         }
         if (line)
@@ -327,7 +327,7 @@ static int test3()
             printf("\n|    gnl call #%d", ntest + 1);
             printf("\n|      expected:");
             print_string_with_escapes(lines[ntest]);
-            printf("\n|      actual:");
+            printf("\n|      actual  :");
             print_string_with_escapes(line);
         }
         if (line)
@@ -370,7 +370,7 @@ static int test2()
     {
         printf("\n|    gnl call #1");
         printf("\n|      expected:%s", "(null)");
-        printf("\n|      actual:%s", line);
+        printf("\n|      actual  :%s", line);
     }
     if (line)
         free(line);
@@ -383,7 +383,7 @@ static int test2()
     {
         printf("\n|    gnl call #2");
         printf("\n|      expected:%s", "(null)");
-        printf("\n|      actual:%s", line);
+        printf("\n|      actual  :%s", line);
     }
     if (line)
         free(line);
@@ -396,7 +396,7 @@ static int test2()
     {
         printf("\n|    gnl call #3");
         printf("\n|      expected:%s", "(null)");
-        printf("\n|      actual:%s", line);
+        printf("\n|      actual  :%s", line);
     }
     if (line)
         free(line);
@@ -442,7 +442,7 @@ static int test1()
             printf("\n|    gnl call #%d", ntest + 1);
             printf("\n|      expected:");
             print_string_with_escapes(lines[ntest]);
-            printf("\n|      actual:");
+            printf("\n|      actual  :");
             print_string_with_escapes(line);
         }
         if (line)
