@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <ctype.h>
 #include <bsd/string.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int  testpassed = 0;
 static int  nb_test = 0;
